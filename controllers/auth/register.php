@@ -15,18 +15,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors["email"] = "Invalid email";
   }
 
-  if (!Validator::string($_POST["password"], min: 6)) {
-    $errors["password"] = "Password too short";
+  if (!Validator::password($_POST["password"])) {
+    $errors["password"] = "Password is invalid";
   }
 
   $query = "SELECT * FROM users WHERE email = :email";
   $params = [":email" => $_POST["email"]];
   $user = $db->execute($query, $params)->fetch();
 
+  if ($user) {
+    $errors["email"] = "e-mail already in use";
+  }
+
 
   // Saglabāsim DB, izmantojot bind params, ar:
-  $_POST["email"];
-  $_POST["password"];
+  if (empty($errors)) {
+    $query = "INSERT INTO users (email, password)
+              VALUES (:email, :password)";
+    $sql_params = [
+      ":email" => $_POST["email"],
+      ":password" => password_hash($_POST["password"], PASSWORD_BCRYPT)
+    ];
+    $db->execute($query, $sql_params);
+    header("Location: /login");
+    die();
+  }
 }
 
 
