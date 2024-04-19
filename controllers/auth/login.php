@@ -20,6 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user = $db->execute($query, $params)->fetch();
   if ($user && password_verify($_POST["password"], $user["password"])) {
     $_SESSION["user"] = $user["email"];
+    header("Location: /");
+    exit();
   } else {
     $errors["email"] = "Invalid email or password";
   }
