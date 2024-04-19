@@ -1,6 +1,6 @@
 <?php
 
-echo $_SESSION["user"];
+auth();
 
 require "views/index.view.php";
 

@@ -1,5 +1,7 @@
 <?php
 
+
+
 $title = "Login";
 
 // 1. Visu nokopēt no register
