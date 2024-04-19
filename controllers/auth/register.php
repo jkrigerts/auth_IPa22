@@ -1,10 +1,10 @@
 <?php
-
+guest();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Include DB, Validator
-  require "Validator.php";
-  require "Database.php";
+  require "Core/Validator.php";
+  require "Core/Database.php";
   $config = require "config.php";
   $db = new Database($config);
 
@@ -44,4 +44,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 $title = "Register";
-require "views/auth/register.view.php";
+require "../views/auth/register.view.php";

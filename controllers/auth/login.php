@@ -8,8 +8,8 @@ $title = "Login";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Include DB, Validator
-  require "Validator.php";
-  require "Database.php";
+  require "Core/Validator.php";
+  require "Core/Database.php";
   $config = require "config.php";
   $db = new Database($config);
   $errors = [];
@@ -29,4 +29,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
 }
-require "views/auth/login.view.php";
+require "../views/auth/login.view.php";
